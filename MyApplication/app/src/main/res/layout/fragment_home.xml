@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="HomePage"
+        android:textSize="20sp"
+        android:id="@+id/textView" />
+
+
+    <com.seanshend.view.pieview.PieView
+        android:layout_width="100dp"
+        android:layout_height="210dp"
+        android:id="@+id/pieView"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeType"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="To bend forward and down from the  backmiddle of the back"
+        android:textSize="20sp"
+        android:id="@+id/textView2"
+        android:layout_alignBottom="@+id/pieView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="42dp"
+        android:id="@+id/textView3"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/pieView"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50"
+
+        android:textSize="15sp"
+
+        android:layout_marginRight="42dp"
+        android:id="@+id/backDegreeTv"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/textView3"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seat"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="42dp"
+        android:id="@+id/textView5"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/backDegreeTv"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30"
+
+        android:textSize="15sp"
+
+        android:layout_marginRight="42dp"
+        android:id="@+id/seatDegreeTv"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/textView5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="42dp"
+        android:id="@+id/textView7"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/seatDegreeTv"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginRight="42dp"
+        android:id="@+id/timeTv"
+        android:layout_alignRight="@+id/chairView"
+        android:layout_below="@+id/textView7"/>
+
+
+    <com.seanshend.view.chairview.ChairView
+        android:layout_width="wrap_content"
+        android:layout_height="170dp"
+        android:id="@+id/chairView"
+        android:layout_below="@+id/pieView"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="AUTO"
+        android:id="@+id/button1"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/chairView"
+        android:background="@drawable/btn_shape1"
+        android:layout_alignParentStart="true"
+       />
+
+</RelativeLayout>

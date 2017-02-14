@@ -35,7 +35,7 @@ public class weekview extends View {
     private int type = 1;
 
     // 数据
-    private ArrayList<Integer> Data;
+    private ArrayList<Integer> mData;
 
     // 宽高
     private int mWidth, mHeight;
@@ -59,10 +59,10 @@ public class weekview extends View {
     }
 
 
-
-    public void updateData(ArrayList<Integer> data) {
-        Data=data;
-        invalidate();
+    // 设置数据
+    public void setmData(ArrayList<Integer> mData) {
+        this.mData = mData;
+        invalidate();   // 刷新
     }
 
 
@@ -82,19 +82,18 @@ public class weekview extends View {
         pointPaint.setStyle(Paint.Style.FILL);  //设置画笔模式为填充
         pointPaint.setTextSize(mHeight / 10);
 
-
         canvas.translate(mWidth/7, 3 * mHeight / 4);                  // 将画布坐标原点移动到中心位置
         float max = 3 * mHeight / 4;
-        float s1 = (float) (1.0 * Data.get(1) / 100 * max);
-        float s2 = (float) (1.0 * Data.get(2) / 100 * max);
-        float s3 = (float) (1.0 * Data.get(3) / 100 * max);
-        float s4 = (float) (1.0 * Data.get(4) / 100 * max);
-        float s5 = (float) (1.0 * Data.get(5) / 100 * max);
-        float s6 = (float) (1.0 * Data.get(6) / 100 * max);
-        float s7 = (float) (1.0 * Data.get(7) / 100 * max);
+        float s1 = (float) (1.0 * mData.get(1) / 100 * max);
+        float s2 = (float) (1.0 * mData.get(2) / 100 * max);
+        float s3 = (float) (1.0 * mData.get(3) / 100 * max);
+        float s4 = (float) (1.0 * mData.get(4) / 100 * max);
+        float s5 = (float) (1.0 * mData.get(5) / 100 * max);
+        float s6 = (float) (1.0 * mData.get(6) / 100 * max);
+        float s7 = (float) (1.0 * mData.get(7) / 100 * max);
 
 
-        mPaint.setColor(CircleColor[Data.get(0)]);
+        mPaint.setColor(CircleColor[mData.get(0)]);
         canvas.drawLine(0, 0, 0, -s1, mPaint);
         canvas.drawText("M", 0, 1, 0, mHeight / 8, pointPaint);
 
@@ -128,12 +127,6 @@ public class weekview extends View {
 
 
 
-    // 设置数据
-    public void setData(ArrayList<Integer> data) {
-
-      Data=data;
-        invalidate();   // 刷新
-    }
 
 
 }

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.seanshend.myapplication.Profile">
+    tools:context="com.seanshend.myapplication.ProfileFragment">
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
 
         android:text="待完善"
-        android:id="@+id/textView4"
+        android:id="@+id/backDegreeTv"
         android:layout_alignRight="@+id/textView3"
         android:layout_marginRight="40dp"
 
@@ -72,7 +72,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/textView5"
     android:textSize="20sp"
-    android:id="@+id/textView6"
+    android:id="@+id/seatDegreeTv"
     android:textStyle="bold"
 
     />
@@ -80,7 +80,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/seatDegreeTv"
         android:textSize="20sp"
         android:text="退出登录"
         android:typeface="monospace"
@@ -105,53 +105,5 @@
         android:src="@drawable/test"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true" />
---> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="8dp"
-    android:gravity="bottom">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_alignBaseline="@+id/r1"
-        android:layout_alignParentStart="true">
-        <ImageButton
-            android:layout_marginLeft="35dp"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:onClick="GoHome"
-            android:id="@+id/button2"
-            android:layout_marginRight="50dp"
-
-            android:background="@drawable/home1"/>
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:onClick="GoData"
-            android:layout_toRightOf="@+id/button2"
-            android:layout_marginRight="50dp"
-            android:id="@+id/button3"
-            android:background="@drawable/data1"
-
-            />
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:onClick="GoSetting"
-            android:layout_marginRight="50dp"
-            android:layout_toRightOf="@+id/button3"
-            android:id="@+id/button4"
-            android:background="@drawable/setting1"/>
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-
-            android:layout_toRightOf="@+id/button4"
-            android:layout_marginRight="40dp"
-            android:id="@+id/button5"
-            android:background="@drawable/user2"
-            android:onClick="GoProfile"/>
-    </RelativeLayout>
-</LinearLayout>
+-->
 </RelativeLayout>
