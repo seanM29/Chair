@@ -1,14 +1,14 @@
 package com.seanshend.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextPaint;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class Profile extends AppCompatActivity {
+public class ProfileFragment extends BaseFragment {
 
 
     TextView t3 = null;
@@ -16,12 +16,19 @@ public class Profile extends AppCompatActivity {
     TextView t6 = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        t3 = (TextView) findViewById(R.id.textView3);
-        t5 = (TextView) findViewById(R.id.textView5);
-        t6 = (TextView) findViewById(R.id.textView6);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        initAll(view);
+        return view;
+    }
+
+    @Override
+    protected void initViews(View view) {
+        super.initViews(view);
+        t3 = (TextView) view.findViewById(R.id.textView3);
+        t5 = (TextView) view.findViewById(R.id.textView5);
+        t6 = (TextView) view.findViewById(R.id.seatDegreeTv);
         t3.post(new Runnable() {
             @Override
             public void run() {
@@ -45,6 +52,7 @@ public class Profile extends AppCompatActivity {
         });
 
     }
+
 
     private void SetText(String in, TextView t1) {
 
@@ -80,16 +88,4 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    public void GoHome(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void GoData(View view){
-        Intent intent = new Intent(this, Data_day.class);
-        startActivity(intent);
-    }
-    public void GoSetting(View view){
-        Intent intent = new Intent(this, Setting.class);
-        startActivity(intent);
-    }
 }

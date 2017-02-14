@@ -53,7 +53,6 @@ public class dayview extends View {
     public dayview(Context context, AttributeSet attrs) {
         super(context, attrs);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(10);
         mPaint.setAntiAlias(true);
     }
 
@@ -63,11 +62,6 @@ public class dayview extends View {
         invalidate();
     }
 
-    public void updateData( ArrayList<Integer>  data) {
-        Data = data;
-        updateAngle();
-        invalidate();
-    }
 
     private void updateAngle() {
         int tmp = 0;
@@ -94,6 +88,7 @@ public class dayview extends View {
         pointPaint.setColor(Color.BLACK);
         pointPaint.setStyle(Paint.Style.FILL);  //设置画笔模式为填充
         pointPaint.setTextSize(mHeight / 10);
+        mPaint.setStrokeWidth(10);
 
         canvas.translate(mWidth / 2, mHeight / 2);                  // 将画布坐标原点移动到中心位置
         float r = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);    // 饼状图半径
@@ -122,14 +117,10 @@ public class dayview extends View {
         canvas.drawArc(rect4, 0, Angle[4], false, mPaint);
 
 
-        mPaint.setStrokeWidth(5);
         String score =""+Data.get(0);
         canvas.drawText(score, 0, score.length(), 0, 0, pointPaint);
         pointPaint.setTextSize(mHeight / 20);
-        mPaint.setStrokeWidth(3);
         canvas.drawText("Total Score", 0, 11, -mHeight/8, mHeight / 8, pointPaint);
-
-
 
     }
 

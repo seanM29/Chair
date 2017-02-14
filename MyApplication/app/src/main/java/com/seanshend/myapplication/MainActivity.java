@@ -1,75 +1,157 @@
 package com.seanshend.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+import android.view.Window;
+import android.widget.RadioGroup;
 
-import com.seanshend.view.pieview.PieData;
+import com.seanshend.DataModel;
 
-import java.util.ArrayList;
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+    private RadioGroup radioGroup;
+    private FragmentManager fm;
+    private DataModel data;
 
-public class MainActivity extends AppCompatActivity {
-
-
-    com.seanshend.view.pieview.PieView v1=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-       v1 = (com.seanshend.view.pieview.PieView)findViewById(R.id.test);
-
-        //data分别为Total, Back, Waist, Hips，Thigh的分值
-        int [] data={44,44,90,92,72};
-        SetDate(data);
-
-
-
+        initDatas();//初始化数据
+        initViews();//初始化控件
+        initEvents();//初始化事件
+        findViewById(R.id.rb_home).performClick();
 
     }
 
-    private void SetDate(int[] data) {
-        ArrayList<PieData> datas = new ArrayList<>();
-        PieData pieData = new PieData("Total", data[0]);
-        PieData pieData2 = new PieData("Back", data[1]);
-        PieData pieData3 = new PieData("Waist", data[2]);
-        PieData pieData4 = new PieData("Hips", data[3]);
-        PieData pieData5 = new PieData("Thigh", data[4]);
-        datas.add(pieData);
-        datas.add(pieData2);
-        datas.add(pieData3);
-        datas.add(pieData4);
-        datas.add(pieData5);
-        v1.setData(datas);
+    private void initDatas() {
+        fm = getSupportFragmentManager();
+        data = new DataModel();
+
+        //即时数据
+        data.setBackScore(100);
+        data.setHipsScore(100);
+        data.setThighScore(100);
+        data.setWaistScore(100);
+        data.setTotalScore(100);
+        data.setBackAngle(60);
+        data.setSeatAngle(40);
+        data.setTime(0);
+
+        //日
+        data.setdBackScore(100);
+        data.setdHipsScore(100);
+        data.setdThighScore(100);
+        data.setdWaistScore(100);
+        data.setdTotalScore(100);
+
+        //周
+        int[] backDatas = {50, 60, 70, 60, 50, 40, 30};
+        int[] hipsDatas = {50, 60, 70, 60, 50, 40, 30};
+        int[] waistDatas = {50, 60, 70, 60, 50, 40, 30};
+        int[] thighDatas = {50, 60, 70, 60, 50, 40, 30};
+        data.setBackDatas(backDatas);
+        data.setHipsDatas(hipsDatas);
+        data.setWaistDatas(waistDatas);
+        data.setThighDatas(thighDatas);
+        data.setwTotalBack(1000);
+        data.setwTotalHips(1000);
+        data.setwTotalWaist(1000);
+        data.setwTotalThigh(1000);
+
+        //模式
+        data.setLastPage(DataModel.AUTO);
+
+        //时钟
+        new ClockThread();
     }
 
-    public void changeType(View view){
-        com.seanshend.view.pieview.PieView v1 = (com.seanshend.view.pieview.PieView)findViewById(R.id.test);
-        TextView t = (TextView)findViewById(R.id.textView2);
-        if(v1.getType()==0) {
-            v1.Settype(1);
-            t.setVisibility(View.GONE);
+    //初始化控件
+    private void initViews() {
+        radioGroup = (RadioGroup) findViewById(R.id.rg_tab);
+    }
+
+    private void initEvents() {
+        radioGroup.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        changeFragment(i);
+    }
+
+    public void changeFragment(int i) {
+        fm.beginTransaction().replace(R.id.main_content, getInstanceByIndex(i)).commit();
+    }
+
+    static final int AUTO1 = -1;
+    static final int AUTO2 = -2;
+
+    public Fragment getInstanceByIndex(int index) {
+        Fragment fragment = null;
+        Bundle bundle = new Bundle();
+        switch (index) {
+            case R.id.rb_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.rb_data:
+                fragment = new DataFragment();
+                break;
+            case R.id.rb_setting:
+                fragment = new SettingFragment();
+                break;
+            case R.id.rb_user:
+                fragment = new ProfileFragment();
+                break;
+            case AUTO1:
+                fragment = new SettingAutoDetailFragment();
+                bundle.putInt("back", 50);
+                bundle.putInt("seat", 30);
+                bundle.putString("mode", "Healthy-back");
+                bundle.putString("pic", "");
+                bundle.putInt("modeID", DataModel.AUTO_M1);
+                fragment.setArguments(bundle);
+                break;
+            case AUTO2:
+                fragment = new SettingAutoDetailFragment();
+                bundle.putInt("back", 15);
+                bundle.putInt("seat", 60);
+                bundle.putString("mode", "Amazing");
+                bundle.putString("pic", "");
+                bundle.putInt("modeID", DataModel.AUTO_M2);
+                fragment.setArguments(bundle);
+                break;
         }
-        else{
-            v1.Settype(0);
-            t.setVisibility(View.VISIBLE);
+        return fragment;
+    }
+
+    //时钟线程
+    class ClockThread implements Runnable {
+        Thread t;
+
+        ClockThread() {
+            t = new Thread(this);
+            t.start();
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    //5s
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                data.setTime(data.getTime() + 1);
+            }
         }
     }
 
-    public void GoProfile(View view){
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-    public void GoSetting(View view){
-        Intent intent = new Intent(this, Setting.class);
-        startActivity(intent);
-    }
-    public void GoData(View view){
-        Intent intent = new Intent(this, Data_day.class);
-        startActivity(intent);
-    }
 
+    public DataModel getData() {
+        return data;
+    }
 }

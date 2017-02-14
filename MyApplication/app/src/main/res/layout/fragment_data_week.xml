@@ -1,45 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_data_week"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-   android:paddingTop="6dp"
-    tools:context="com.seanshend.myapplication.Data_week">
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:onClick="GoDay"
-            android:text="Day" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:background="#E8E8E8"
-            android:onClick="GoManu"
-            android:text="Week" />
-    </LinearLayout>
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1">
+        android:layout_height="wrap_content">
 
         <com.seanshend.view.Circle.Circle
             android:id="@+id/c1"
@@ -239,60 +206,4 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:paddingBottom="8dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_alignBaseline="@+id/r1"
-            android:layout_alignParentStart="true">
-
-            <ImageButton
-                android:id="@+id/button2"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="50dp"
-                android:onClick="GoHome"
-                android:background="@drawable/home1" />
-
-            <ImageButton
-                android:id="@+id/button3"
-                android:layout_width="30dp"
-
-                android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
-                android:layout_toRightOf="@+id/button2"
-                android:background="@drawable/data2"
-                android:onClick="GoData"
-
-                />
-
-            <ImageButton
-                android:id="@+id/button4"
-                android:layout_width="30dp"
-
-                android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
-                android:layout_toRightOf="@+id/button3"
-                android:background="@drawable/setting1"
-                android:onClick="GoSetting" />
-
-            <ImageButton
-                android:id="@+id/button5"
-                android:layout_width="30dp"
-
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:layout_toRightOf="@+id/button4"
-                android:background="@drawable/user1"
-                android:onClick="GoProfile" />
-        </RelativeLayout>
-    </LinearLayout>
 </RelativeLayout>

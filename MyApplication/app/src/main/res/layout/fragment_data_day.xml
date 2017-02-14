@@ -1,44 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_data_day"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.seanshend.myapplication.Data_day">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/linearLayout1"
-        >
-
-        <Button
-            android:background="#E8E8E8"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:text="Day"
-            android:layout_weight="1"
-            android:id="@+id/button" />
-
-        <Button
-            android:text="Week"
-            android:background="#FFFFFF"
-            android:layout_width="0dp"
-            android:onClick="GoWeek"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:id="@+id/button6"
-            />
-
-    </LinearLayout>
     <com.seanshend.view.dataview.dayview
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/linearLayout1"
         android:id="@+id/data_day"/>
     <RelativeLayout
         android:layout_below="@id/data_day"
@@ -164,59 +132,5 @@
             android:text="60"
             android:textStyle="bold"/>
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        android:gravity="bottom"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_alignBaseline="@+id/r1"
-            android:layout_alignParentStart="true">
-            <ImageButton
-                android:layout_marginLeft="35dp"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-
-                android:id="@+id/button2"
-                android:layout_marginRight="50dp"
-                android:onClick="GoHome"
-                android:background="@drawable/home1"/>
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-
-                android:layout_toRightOf="@+id/button2"
-                android:layout_marginRight="50dp"
-                android:id="@+id/button3"
-                android:background="@drawable/data2"
-                android:onClick="GoData"
-
-                />
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-
-                android:layout_marginRight="50dp"
-                android:layout_toRightOf="@+id/button3"
-                android:id="@+id/button4"
-                android:onClick="GoSetting"
-                android:background="@drawable/setting1"/>
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-
-                android:layout_toRightOf="@+id/button4"
-                android:layout_marginRight="40dp"
-                android:id="@+id/button5"
-                android:background="@drawable/user1"
-                android:onClick="GoProfile"/>
-        </RelativeLayout>
-    </LinearLayout>
 
 </RelativeLayout>
