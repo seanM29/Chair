@@ -8,11 +8,23 @@ import android.view.Window;
 import android.widget.RadioGroup;
 
 import com.seanshend.DataModel;
+import com.seanshend.bluetooth.BlueTooth;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+    public final static String LOG_TAG = "Chair";
+
     private RadioGroup radioGroup;
     private FragmentManager fm;
     private DataModel data;
+    private BlueTooth mBlueTooth;
+
+    private enum MsgState {
+        UNCONNECTED, PREPARE, RECEIVE_DATA, RECEIVE_FINISHED, SEND_FINISHED
+    }
+
+    private MsgState msgState;
+    private int iOfData;
+    private int[] receiveData = new int[8];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +32,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         initDatas();//初始化数据
+        initService();//初始化服务
         initViews();//初始化控件
         initEvents();//初始化事件
         findViewById(R.id.rb_home).performClick();
-
     }
 
     private void initDatas() {
-        fm = getSupportFragmentManager();
         data = new DataModel();
 
         //即时数据
@@ -63,9 +74,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         //模式
         data.setLastPage(DataModel.AUTO);
-
+        data.setConnected(false);
         //时钟
         new ClockThread();
+
+//        data.setAngleChanged(false);
+        data.setAngleChanged(true);
     }
 
     //初始化控件
@@ -76,6 +90,83 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private void initEvents() {
         radioGroup.setOnCheckedChangeListener(this);
     }
+
+    private void initService() {
+        fm = getSupportFragmentManager();
+        data.setPressure(receiveData.clone());
+        mBlueTooth = new BlueTooth(new BlueTooth.BlueToothListener() {
+            @Override
+            public void onReceiving(int val) {
+                switch (msgState) {
+                    case PREPARE:
+                        if (val == 254) {
+                            mBlueTooth.clearMsgPool();
+                            mBlueTooth.sendMsg(252);
+                            msgState = MsgState.RECEIVE_DATA;
+                        } else
+                            restartReceive();
+                        break;
+                    case RECEIVE_DATA:
+                        if (val < 240) {
+                            receiveData[iOfData++] = val;
+                        } else if (iOfData == 8 && val == 253) {
+                            data.setPressure(receiveData.clone());
+
+                            iOfData = 0;
+                            for (int i = 0; i < 8; i++)
+                                receiveData[i] = 0;
+
+                            mBlueTooth.sendMsg(253);
+                            msgState = MsgState.RECEIVE_FINISHED;
+                        } else
+                            restartReceive();
+                        break;
+                    case RECEIVE_FINISHED:
+                        if (val == 252 && data.isAngleChanged()) {
+                            mBlueTooth.sendMsg(251);
+                            mBlueTooth.sendMsg(data.getBackAngle());
+                            mBlueTooth.sendMsg(data.getSeatAngle());
+                            msgState = MsgState.SEND_FINISHED;
+                        } else
+                            restartReceive();
+                        break;
+                    case SEND_FINISHED:
+                        if (val == 251) {
+                            data.setAngleChanged(false);
+                            mBlueTooth.sendMsg(254);
+                            msgState = MsgState.PREPARE;
+                        } else {
+                            restartReceive();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onReconnect() {
+                restartReceive();
+                data.setConnected(true);
+            }
+
+            @Override
+            public void onConnectFailed() {
+                msgState = MsgState.UNCONNECTED;
+                data.setConnected(false);
+            }
+
+            private void restartReceive() {
+                iOfData = 0;
+                for (int i = 0; i < 8; i++)
+                    receiveData[i] = 0;
+                mBlueTooth.clearMsgPool();
+                mBlueTooth.sendMsg(254);
+                msgState = MsgState.PREPARE;
+            }
+        });
+    }
+
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
