@@ -1,5 +1,9 @@
 package com.seanshend;
 
+import android.util.Log;
+
+import com.seanshend.myapplication.MainActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +15,13 @@ public class DataModel implements Subject {
     //角度
     private int backAngle;
     private int seatAngle;
+    private boolean isAngleChanged;
+
+    //压力
+    private int backPressure;
+    private int waistPressure;
+    private int hipPressure;
+    private int thighPressure;
 
     //分数
     private int totalScore;
@@ -39,18 +50,34 @@ public class DataModel implements Subject {
     private int dThighScore;
 
     //模式
-    public static final int AUTO = -1;
-    public static final int AUTO_M1 = -2;
-    public static final int AUTO_M2 = -3;
-    public static final int NONE = 0;
-    public static final int MANU = 1;
+    public static final int AUTO = 0;
+    public static final int AUTO_M1 = 1;
+    public static final int AUTO_M2 = 2;
+    public static final int NONE = 3;
+    public static final int MANU = 4;
+
     private int mode;
+
+    //是否连接蓝牙
+    private boolean isConnected;
+
+    //操作信号
+    public static final int CHANGE_BACK = 0;
+    public static final int CHANGE_SEAT = 1;
+
+    //接收信号
+    public static final int RECEIVE_BACK = 0;
+    public static final int RECEIVE_WAIST = 1;
+    public static final int RECEIVE_HIPS = 2;
+    public static final int RECEIVE_THIGH = 3;
+
     //上一次设置页面
     private int lastPage;
 
     //时间
     private int time;
 
+    private int[] pressure;
 
     //观察者列表
     private List<Observer> observerList = new ArrayList<>();
@@ -72,6 +99,13 @@ public class DataModel implements Subject {
         }
     }
 
+    private void calcScore() {
+        this.setBackScore(0);
+        this.setWaistScore(0);
+        this.setdHipsScore(0);
+        this.setThighScore(0);
+    }
+
     //Getters and setters
     public int getBackAngle() {
         return backAngle;
@@ -79,6 +113,8 @@ public class DataModel implements Subject {
 
     public void setBackAngle(int backAngle) {
         this.backAngle = backAngle;
+        isAngleChanged = true;
+        notifyAllObserver();
     }
 
     public int getSeatAngle() {
@@ -87,7 +123,16 @@ public class DataModel implements Subject {
 
     public void setSeatAngle(int seatAngle) {
         this.seatAngle = seatAngle;
+        isAngleChanged = true;
         notifyAllObserver();
+    }
+
+    public boolean isAngleChanged() {
+        return isAngleChanged;
+    }
+
+    public void setAngleChanged(boolean angleChanged) {
+        isAngleChanged = angleChanged;
     }
 
     public int getTotalScore() {
@@ -133,6 +178,42 @@ public class DataModel implements Subject {
     public void setThighScore(int thighScore) {
         this.thighScore = thighScore;
         notifyAllObserver();
+    }
+
+    public int getHipPressure() {
+        return hipPressure;
+    }
+
+    public void setHipPressure(int hipPressure) {
+        this.hipPressure = hipPressure;
+        calcScore();
+    }
+
+    public int getWaistPressure() {
+        return waistPressure;
+    }
+
+    public void setWaistPressure(int waistPressure) {
+        this.waistPressure = waistPressure;
+        calcScore();
+    }
+
+    public int getBackPressure() {
+        return backPressure;
+    }
+
+    public void setBackPressure(int backPressure) {
+        this.backPressure = backPressure;
+        calcScore();
+    }
+
+    public int getThighPressure() {
+        return thighPressure;
+    }
+
+    public void setThighPressure(int thighPressure) {
+        this.thighPressure = thighPressure;
+        calcScore();
     }
 
     public int getMode() {
@@ -279,11 +360,21 @@ public class DataModel implements Subject {
         notifyAllObserver();
     }
 
-    public List<Observer> getObserverList() {
-        return observerList;
+    public void setPressure(int[] pressure) {
+        this.pressure = pressure;
+        notifyAllObserver();
     }
 
-    public void setObserverList(List<Observer> observerList) {
-        this.observerList = observerList;
+    public int[] getPressure() {
+        return pressure;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
+        notifyAllObserver();
     }
 }

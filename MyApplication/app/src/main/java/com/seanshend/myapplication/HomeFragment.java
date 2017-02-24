@@ -83,8 +83,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void update() {
-        backDegreeTv.setText(data.getBackAngle() + "");
-        seatDegreeTv.setText(data.getSeatAngle() + "");
-        timeTv.setText(data.getTime() + " min");
+        backDegreeTv.setText(data.isConnected()?data.getBackAngle()+ "":"未连接蓝牙" );
+        seatDegreeTv.setText(data.isConnected()?data.getSeatAngle()+ "":"未连接蓝牙");
+        timeTv.setText(data.isConnected()?data.getTime()+ "":"未连接蓝牙");
     }
 }

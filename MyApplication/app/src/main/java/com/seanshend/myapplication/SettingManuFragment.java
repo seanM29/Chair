@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
     TextView backtext = null;
     TextView seattext = null;
+    TextView pressure = null;
 
     com.seanshend.view.chairview.ChairView back = null;
     com.seanshend.view.lineview.lineview line1 = null;
@@ -49,6 +51,7 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
         backtext = (TextView) view.findViewById(R.id.textView2);
         seattext = (TextView) view.findViewById(R.id.textView3);
+        pressure = (TextView) view.findViewById(R.id.textView9);
 
         back = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.back2);
         line1 = (com.seanshend.view.lineview.lineview) view.findViewById(R.id.line1);
@@ -186,6 +189,11 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void update() {
+        int[] receiveData=data.getPressure();
+
+        String ret="p1:"+receiveData[0]+" p2:"+receiveData[1]+"  p3:"+receiveData[2]+" p4:"+receiveData[3]+" p5:"+receiveData[4]+" p6:"+receiveData[5]+" p7:"+receiveData[6]+" p8:"+receiveData[7];
+        pressure.setText(ret);
+
         if (data.getTime() >= 90){
             data.setMode(DataModel.NONE);
         }
