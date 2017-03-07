@@ -98,31 +98,40 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
     }
 
     public void backminus() {
-        back.minAngle();
-        line1.minAngle();
-        data.setBackAngle(back.getAngle());
-        backtext.setText("" + back.getAngle());
+        if (back.getAngle() > 41) {
+            back.minAngle();
+            line1.minAngle();
+            data.setBackAngle(back.getAngle());
+            backtext.setText("" + back.getAngle());
+        }
     }
 
     public void backadd() {
-        back.addAngle();
-        line1.addAngle();
-        data.setBackAngle(back.getAngle());
-        backtext.setText("" + back.getAngle());
+        if (back.getAngle() < 81) {
+            back.addAngle();
+            line1.addAngle();
+            data.setBackAngle(back.getAngle());
+            backtext.setText("" + back.getAngle());
+        }
     }
 
     public void seatminus() {
-        seat.addAngle();
-        line2.minAngle();
-        data.setSeatAngle(360 - seat.getAngle());
-        seattext.setText("" + (360 - seat.getAngle()));
+        if (360 - seat.getAngle() > 4) {
+            seat.addAngle();
+            line2.minAngle();
+            data.setSeatAngle(360 - seat.getAngle());
+            seattext.setText("" + (360 - seat.getAngle()));
+
+        }
     }
 
     public void seatadd() {
-        seat.minAngle();
-        line2.addAngle();
-        data.setSeatAngle(360 - seat.getAngle());
-        seattext.setText("" + (360 - seat.getAngle()));
+        if (360 - seat.getAngle() < 26) {
+            seat.minAngle();
+            line2.addAngle();
+            data.setSeatAngle(360 - seat.getAngle());
+            seattext.setText("" + (360 - seat.getAngle()));
+        }
     }
 
     @Override
@@ -189,12 +198,12 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void update() {
-        int[] receiveData=data.getPressure();
+        int[] receiveData = data.getPressure();
 
-        String ret="p1:"+receiveData[0]+" p2:"+receiveData[1]+"  p3:"+receiveData[2]+" p4:"+receiveData[3]+" p5:"+receiveData[4]+" p6:"+receiveData[5]+" p7:"+receiveData[6]+" p8:"+receiveData[7];
+        String ret = "p1:" + receiveData[0] + " p2:" + receiveData[1] + "  p3:" + receiveData[2] + " p4:" + receiveData[3] + " p5:" + receiveData[4] + " p6:" + receiveData[5] + " p7:" + receiveData[6] + " p8:" + receiveData[7];
         pressure.setText(ret);
 
-        if (data.getTime() >= 90){
+        if (data.getTime() >= 90) {
             data.setMode(DataModel.NONE);
         }
 
@@ -205,7 +214,7 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
             progressBar.setProgress(90);
 
         //手动模式开启，50min后显示剩余时间
-        if (data.getTime() > 50  && data.getMode() == DataModel.MANU) {
+        if (data.getTime() > 50 && data.getMode() == DataModel.MANU) {
             tv.setTextColor(0xff4c9fff);
             String strTime = (90 - data.getTime()) + " Min";
             tv.setText(strTime);

@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         data.setThighScore(100);
         data.setWaistScore(100);
         data.setTotalScore(100);
-        data.setBackAngle(60);
-        data.setSeatAngle(40);
+        data.setBackAngle(80);
+        data.setSeatAngle(5);
         data.setTime(0);
 
         //日

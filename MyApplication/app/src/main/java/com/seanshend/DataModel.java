@@ -112,9 +112,11 @@ public class DataModel implements Subject {
     }
 
     public void setBackAngle(int backAngle) {
-        this.backAngle = backAngle;
-        isAngleChanged = true;
-        notifyAllObserver();
+        if (backAngle > 41 && backAngle < 81) {
+            this.backAngle = backAngle;
+            isAngleChanged = true;
+            notifyAllObserver();
+        }
     }
 
     public int getSeatAngle() {
@@ -122,9 +124,11 @@ public class DataModel implements Subject {
     }
 
     public void setSeatAngle(int seatAngle) {
-        this.seatAngle = seatAngle;
-        isAngleChanged = true;
-        notifyAllObserver();
+        if (seatAngle > 4 && seatAngle < 26) {
+            this.seatAngle = seatAngle;
+            isAngleChanged = true;
+            notifyAllObserver();
+        }
     }
 
     public boolean isAngleChanged() {
