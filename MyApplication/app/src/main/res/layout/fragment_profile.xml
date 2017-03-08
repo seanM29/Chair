@@ -13,13 +13,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="ME"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:id="@+id/textView1"
         android:gravity="center_horizontal"
         android:textSize="30sp"
         />
 
-    <TextView
+    <com.seanshend.view.CustomFontTextView.CustomFontTextView
         android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -39,10 +40,10 @@
         android:textSize="20sp"
         android:id="@+id/textView3"
         android:textStyle="bold"
-
+        android:textColor="#000000"
         />
 
-    <TextView
+    <com.seanshend.view.CustomFontTextView.CustomFontTextView
         android:layout_marginTop="13dp"
         android:layout_below="@+id/textView2"
         android:layout_width="wrap_content"
@@ -57,34 +58,34 @@
         />
 
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:textSize="20sp"
         android:id="@+id/textView5"
         android:textStyle="bold"
-
+        android:textColor="#000000"
         />
     <TextView
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="25dp"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/textView5"
     android:textSize="20sp"
     android:id="@+id/seatDegreeTv"
     android:textStyle="bold"
-
+        android:textColor="#000000"
     />
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seatDegreeTv"
         android:textSize="20sp"
         android:text="退出登录"
         android:typeface="monospace"
-
+        android:textColor="#000000"
         />
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"

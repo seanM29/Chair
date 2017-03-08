@@ -22,16 +22,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-
+            android:textColor="#000000"
             android:layout_toRightOf="@id/c1"
             android:text="Back Score"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.seanshend.view.CustomFontTextView.CustomFontTextView
             android:id="@+id/t2"
             android:layout_width="wrap_content"
-
+            android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/t1"
@@ -73,16 +73,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-
+            android:textColor="#000000"
             android:layout_toRightOf="@id/c2"
             android:text="HIPS Score"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.seanshend.view.CustomFontTextView.CustomFontTextView
             android:id="@+id/t4"
             android:layout_width="wrap_content"
-
+            android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/t3"
@@ -124,16 +124,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-
+            android:textColor="#000000"
             android:layout_toRightOf="@id/c3"
             android:text="WAIST Score"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.seanshend.view.CustomFontTextView.CustomFontTextView
             android:id="@+id/t6"
             android:layout_width="wrap_content"
-
+            android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/t5"
@@ -175,16 +175,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-
+            android:textColor="#000000"
             android:layout_toRightOf="@id/c4"
             android:text="THIGH Score"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.seanshend.view.CustomFontTextView.CustomFontTextView
             android:id="@+id/t8"
             android:layout_width="wrap_content"
-
+            android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/t7"

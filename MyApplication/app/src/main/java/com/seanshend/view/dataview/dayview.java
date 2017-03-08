@@ -118,7 +118,7 @@ public class dayview extends View {
 
 
         String score =""+Data.get(0);
-        canvas.drawText(score, 0, score.length(), 0, 0, pointPaint);
+        canvas.drawText(score, 0, score.length(), -mHeight/13, 0, pointPaint);
         pointPaint.setTextSize(mHeight / 20);
         canvas.drawText("Total Score", 0, 11, -mHeight/8, mHeight / 8, pointPaint);
 

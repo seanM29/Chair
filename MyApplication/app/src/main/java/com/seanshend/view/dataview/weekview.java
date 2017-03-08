@@ -95,31 +95,31 @@ public class weekview extends View {
 
         mPaint.setColor(CircleColor[mData.get(0)]);
         canvas.drawLine(0, 0, 0, -s1, mPaint);
-        canvas.drawText("M", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("M", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s2, mPaint);
-        canvas.drawText("T", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("T", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s3, mPaint);
-        canvas.drawText("W", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("W", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s4, mPaint);
-        canvas.drawText("T", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("T", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s5, mPaint);
-        canvas.drawText("F", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("F", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s6, mPaint);
-        canvas.drawText("S", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("S", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
         canvas.translate(mWidth / 8, 0);
         canvas.drawLine(0, 0, 0, -s7, mPaint);
-        canvas.drawText("S", 0, 1, 0, mHeight / 8, pointPaint);
+        canvas.drawText("S", 0, 1, -mHeight / 20, mHeight / 8, pointPaint);
 
 
     }

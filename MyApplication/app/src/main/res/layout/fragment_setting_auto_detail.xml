@@ -14,10 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.seanshend.view.CustomFontTextView.CustomFontTextView
             android:id="@+id/goBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
-    <TextView
+    <com.seanshend.view.CustomFontTextView.CustomFontTextView
         android:id="@+id/timeTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
             android:layout_below="@+id/textView1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:src="@drawable/test"
+            android:src="@drawable/settingauto2"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
     </RelativeLayout>
@@ -79,10 +80,11 @@
                 android:layout_below="@+id/Back"
                 android:gravity="center_horizontal"
                 android:text="Back"
+                android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.seanshend.view.CustomFontTextView.CustomFontTextView
                 android:id="@+id/backValTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +92,7 @@
                 android:layout_below="@+id/tv2"
                 android:gravity="center_horizontal"
                 android:text="50"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -118,30 +120,34 @@
                 android:layout_below="@+id/Front"
                 android:gravity="center_horizontal"
                 android:text="Seat"
+                android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.seanshend.view.CustomFontTextView.CustomFontTextView
                 android:id="@+id/frontValTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
                 android:gravity="center_horizontal"
                 android:text="30"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+
+       >
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
             android:max="90"
             android:progress="90"
             android:layout_centerInParent="true"

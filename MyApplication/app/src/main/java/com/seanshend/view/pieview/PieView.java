@@ -97,7 +97,7 @@ public class PieView extends View {
 
 
           // 参数分别为 (字符串 开始截取位置 结束截取位置 基线x 基线y 画笔)
-          canvas.drawText(str,0,str.length(),-r/4, 4*r/7,textPaint);
+          canvas.drawText(str,0,str.length(),-r/4, 3*r/7,textPaint);
 
           Paint pointPaint = new Paint();
           pointPaint.setColor(Color.WHITE);
@@ -105,7 +105,7 @@ public class PieView extends View {
           pointPaint.setTextSize(2*r/5);
 
           String poins = String.valueOf(mData.get(0).getValue());
-          canvas.drawText(poins,0,2,-r/6, 0,pointPaint);
+          canvas.drawText(poins,0,2,-r/4, 0,pointPaint);
 
 
       }
@@ -141,15 +141,22 @@ public class PieView extends View {
 
 
         // 参数分别为 (字符串 开始截取位置 结束截取位置 基线x 基线y 画笔)
-        canvas.drawText(str,0,str.length(),-r/4, 4*r/7,textPaint);
-
+        if(str.length()==4) {
+            canvas.drawText(str, 0, str.length(), -r / 4, 3 * r / 7, textPaint);
+        }
+        else if(str.length()==5){
+            canvas.drawText(str, 0, str.length(), (float) (-0.30*r), 3 * r / 7, textPaint);
+        }
+        else{
+            canvas.drawText(str, 0, str.length(), (float) (-0.35*r), 3 * r / 7, textPaint);
+        }
         Paint pointPaint = new Paint();
         pointPaint.setColor(Color.WHITE);
         pointPaint.setStyle(Paint.Style.FILL);  //设置画笔模式为填充
         pointPaint.setTextSize(2*r/5);
 
         String poins = String.valueOf(mData.get(index).getValue());
-        canvas.drawText(poins,0,2,-r/6, 0,pointPaint);
+        canvas.drawText(poins,0,2,-r/4, 0,pointPaint);
      //   canvas.translate(r/4+r/6,-4*r/7);
     }
 

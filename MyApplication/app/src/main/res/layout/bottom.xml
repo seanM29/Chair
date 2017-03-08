@@ -21,15 +21,17 @@
             android:background="@drawable/home_selector"
             />
 
-        <RadioButton
-            android:id="@+id/rb_data"
-            style="@style/tab"
-            android:background="@drawable/data_selector"/>
 
         <RadioButton
             android:id="@+id/rb_setting"
             style="@style/tab"
             android:background="@drawable/setting_selector"/>
+
+
+        <RadioButton
+            android:id="@+id/rb_data"
+            style="@style/tab"
+            android:background="@drawable/data_selector"/>
 
         <RadioButton
             android:id="@+id/rb_user"

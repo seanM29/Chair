@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -82,7 +81,7 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
         back.Settype(3, data.getBackAngle());
         line1.setType(0, data.getBackAngle());
         seat.Settype(4, 360 - data.getSeatAngle());
-        line2.setType(0, data.getSeatAngle());
+        line2.setType(1, data.getSeatAngle());
 
         backtext.setText("" + back.getAngle());
         seattext.setText("" + (360 - seat.getAngle()));

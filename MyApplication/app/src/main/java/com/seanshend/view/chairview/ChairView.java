@@ -86,7 +86,7 @@ public class ChairView extends View {
     public ChairView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(10);
+        mPaint.setStrokeWidth(5);
         mPaint.setAntiAlias(true);
     }
 
@@ -163,7 +163,7 @@ public class ChairView extends View {
         } else if (type == 3) {
             r = (float) (r * 1.1);
             RectF rect = new RectF(-r, -r, r, r);                       // 饼状图绘制区域
-            mPaint.setStrokeWidth(10);
+            mPaint.setStrokeWidth(5);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawArc(rect, 0, 360, true, mPaint);
 
@@ -181,7 +181,7 @@ public class ChairView extends View {
         } else {
             r = (float) (r * 1.1);
             RectF rect = new RectF(-r, -r, r, r);                       // 饼状图绘制区域
-            mPaint.setStrokeWidth(10);
+            mPaint.setStrokeWidth(5);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawArc(rect, 0, 360, true, mPaint);
 
@@ -250,34 +250,5 @@ public class ChairView extends View {
         return angle;
     }
 
-    // 初始化数据
-   /* private void initData(ArrayList<PieData> mData) {
-        if (null == mData || mData.size() == 0)   // 数据有问题 直接返回
-            return;
 
-        float sumValue = 0;
-        for (int i = 0; i < mData.size(); i++) {
-            PieData pie = mData.get(i);
-
-            sumValue += pie.getValue();       //计算数值和
-
-            int j = i % mColors.length;       //设置颜色
-            pie.setColor(mColors[j]);
-        }
-
-        float sumAngle = 0;
-        for (int i = 0; i < mData.size(); i++) {
-            PieData pie = mData.get(i);
-
-            float percentage = pie.getValue() / sumValue;   // 百分比
-            float angle = percentage * 360;                 // 对应的角度
-
-            pie.setPercentage(percentage);                  // 记录百分比
-            pie.setAngle(angle);                            // 记录角度大小
-            sumAngle += angle;
-
-            Log.i("angle", "" + pie.getAngle());
-        }
-    }
-*/
 }

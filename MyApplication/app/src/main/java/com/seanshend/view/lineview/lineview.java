@@ -102,13 +102,13 @@ public class lineview extends View {
 
         canvas.translate(0, mHeight / 2);                  // 将画布坐标原点移动到中心位置
         float r = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);    // 饼状图半径
-        float center = (float) (1.0 * angle * mWidth / 90.0);
+
 
 
         if (type == 0) {           //默认状态
             mPaint.setStrokeWidth(5);
             mPaint.setColor(0xff4c9fff);
-
+            float center = (float) (1.0 * (angle-41) * mWidth / 40.0);
             canvas.drawLine(0, 0, center, 0, mPaint);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawLine(center, 0, mWidth, 0, mPaint);
@@ -124,13 +124,29 @@ public class lineview extends View {
         } else {
             mPaint.setStrokeWidth(5);
             mPaint.setColor(Color.BLACK);
+            float center = (float) (1.0 * (angle-4) * mWidth / 22.0);
+            canvas.drawLine(0, 0, center, 0, mPaint);
+            mPaint.setColor(BackgroundColor[0]);
+            canvas.drawLine(center, 0, mWidth, 0, mPaint);
+            canvas.translate(center, 0);
+            mPaint.setColor(0xffffffff);
+            mPaint.setStyle(Paint.Style.FILL);
+            RectF rect1 = new RectF(-r - 1, -r - 1, r + 1, r + 1);
+            canvas.drawArc(rect1, 0, 360, true, mPaint);
+            mPaint.setColor(0x19000000);
+            mPaint.setStyle(Paint.Style.STROKE);
+            RectF rect2 = new RectF(-r - 1, -r - 1, r + 1, r + 1);
+            canvas.drawArc(rect2, 0, 360, true, mPaint);
+           /* mPaint.setStrokeWidth(5);
+            mPaint.setColor(Color.BLACK);
+            float center = (float) (1.0 * (angle-4) * mWidth / 22.0);
             canvas.drawLine(0, 0, center, 0, mPaint);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawLine(center, 0, mWidth, 0, mPaint);
             canvas.translate(center, 0);
 
             RectF rect = new RectF(-r, -r, r, r);
-            canvas.drawArc(rect, 0, 360, true, mPaint);
+            canvas.drawArc(rect, 0, 360, true, mPaint);*/
         }
 
 
