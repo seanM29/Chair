@@ -34,13 +34,13 @@ public class PieData {
     public PieData(@NonNull String name, @NonNull int value) {
         if(name.equals("Total")){
             if(value>=90){
-                this.name="Well";
+                this.name="极好";
             }
             else if(value<=60){
-                this.name="Danger";
+                this.name="危险";
             }
             else {
-                this.name="Normal";
+                this.name="一般";
             }
         }
         else {

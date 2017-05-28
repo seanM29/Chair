@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Window;
 import android.widget.RadioGroup;
 
@@ -47,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         data.setThighScore(100);
         data.setWaistScore(100);
         data.setTotalScore(100);
-        data.setBackAngle(80);
-        data.setSeatAngle(5);
+
+        data.setBackAngle(84);
+        data.setSeatAngle(0);
         data.setTime(0);
 
         //日
@@ -198,18 +200,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case AUTO1:
                 fragment = new SettingAutoDetailFragment();
-                bundle.putInt("back", 50);
-                bundle.putInt("seat", 30);
-                bundle.putString("mode", "Healthy-back");
+                bundle.putInt("backChairView", 37);
+                bundle.putInt("seatChairView", 15);
+                bundle.putString("mode", "Hips");
                 bundle.putString("pic", "");
                 bundle.putInt("modeID", DataModel.AUTO_M1);
                 fragment.setArguments(bundle);
                 break;
             case AUTO2:
                 fragment = new SettingAutoDetailFragment();
-                bundle.putInt("back", 15);
-                bundle.putInt("seat", 60);
-                bundle.putString("mode", "Amazing");
+                bundle.putInt("backChairView", 84);
+                bundle.putInt("seatChairView", 0);
+                bundle.putString("mode", "Daily");
                 bundle.putString("pic", "");
                 bundle.putInt("modeID", DataModel.AUTO_M2);
                 fragment.setArguments(bundle);
@@ -219,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     }
 
     //时钟线程
+
     class ClockThread implements Runnable {
         Thread t;
 
@@ -229,6 +232,10 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         @Override
         public void run() {
+            // 0 : 表示现在是坐着的
+            // >0 : 表示上次起立的时间
+            int lastSetUp = 0;
+            int time = 0;
             while (true) {
                 try {
                     //5s
@@ -236,7 +243,30 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                data.setTime(data.getTime() + 1);
+                time = time + 1;
+
+                //站起后压力清空
+                if (data.getBackPressure() <= 5 &&
+                        data.getWaistPressure() <= 5 &&
+                        data.getThighPressure() <= 5 &&
+                        data.getHipsPressure() <= 5) {
+                    //set up
+                    lastSetUp = (lastSetUp == 0 ? time : lastSetUp);
+                    if (time - lastSetUp > 10) {
+                        data.setTime(0);
+                        data.setBackScore(100);
+                        data.setWaistScore(100);
+                        data.setThighScore(100);
+                        data.setHipsScore(100);
+                    }
+                } else {
+                    data.setTime(data.getTime() + 1);
+                    lastSetUp = 0;
+                    data.updateBackScore();
+                    data.updateHipsScore();
+                    data.updateThighScore();
+                    data.updateWaistScore();
+                }
             }
         }
     }

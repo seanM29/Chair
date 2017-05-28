@@ -21,9 +21,9 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
     TextView seattext = null;
     TextView pressure = null;
 
-    com.seanshend.view.chairview.ChairView back = null;
+    com.seanshend.view.chairview.ChairView backChairView = null;
     com.seanshend.view.lineview.lineview line1 = null;
-    com.seanshend.view.chairview.ChairView seat = null;
+    com.seanshend.view.chairview.ChairView seatChairView = null;
     com.seanshend.view.lineview.lineview line2 = null;
 
     Button backMinusBtn = null;
@@ -52,9 +52,9 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
         seattext = (TextView) view.findViewById(R.id.textView3);
         pressure = (TextView) view.findViewById(R.id.textView9);
 
-        back = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.back2);
+        backChairView = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.back2);
         line1 = (com.seanshend.view.lineview.lineview) view.findViewById(R.id.line1);
-        seat = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.seat2);
+        seatChairView = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.seat2);
         line2 = (com.seanshend.view.lineview.lineview) view.findViewById(R.id.line2);
 
         backMinusBtn = (Button) view.findViewById(R.id.backMinusBtn);
@@ -73,18 +73,19 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
         backAddBtn.setOnTouchListener(this);
         seatMinusBtn.setOnTouchListener(this);
         seatAddBtn.setOnTouchListener(this);
+        new Thread(addRunnable).start();
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-        back.Settype(3, data.getBackAngle());
+        backChairView.Settype(3, data);
         line1.setType(0, data.getBackAngle());
-        seat.Settype(4, 360 - data.getSeatAngle());
+        seatChairView.Settype(4, data);
         line2.setType(1, data.getSeatAngle());
 
-        backtext.setText("" + back.getAngle());
-        seattext.setText("" + (360 - seat.getAngle()));
+        backtext.setText("" + data.getBackAngle());
+        seattext.setText("" + data.getSeatAngle());
 
         update();
     }
@@ -97,39 +98,42 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
     }
 
     public void backminus() {
-        if (back.getAngle() > 41) {
-            back.minAngle();
+        if (data.getBackAngle() >= DataModel.MIN_BACK) {
             line1.minAngle();
-            data.setBackAngle(back.getAngle());
-            backtext.setText("" + back.getAngle());
+            data.setBackAngle(data.getBackAngle() - 1);
+            backtext.setText("" + data.getBackAngle());
+            seatChairView.update();
+            backChairView.update();
         }
     }
 
     public void backadd() {
-        if (back.getAngle() < 81) {
-            back.addAngle();
+        if (data.getBackAngle() <= DataModel.MAX_BACK) {
             line1.addAngle();
-            data.setBackAngle(back.getAngle());
-            backtext.setText("" + back.getAngle());
+            data.setBackAngle(data.getBackAngle() + 1);
+            backtext.setText("" + data.getBackAngle());
+            seatChairView.update();
+            backChairView.update();
         }
     }
 
     public void seatminus() {
-        if (360 - seat.getAngle() > 4) {
-            seat.addAngle();
+        if (data.getSeatAngle() >= DataModel.MIN_SEAT) {
             line2.minAngle();
-            data.setSeatAngle(360 - seat.getAngle());
-            seattext.setText("" + (360 - seat.getAngle()));
-
+            data.setSeatAngle(data.getSeatAngle() - 1);
+            seattext.setText("" + data.getSeatAngle());
+            seatChairView.update();
+            backChairView.update();
         }
     }
 
     public void seatadd() {
-        if (360 - seat.getAngle() < 26) {
-            seat.minAngle();
+        if (data.getSeatAngle() <= DataModel.MAX_SEAT) {
             line2.addAngle();
-            data.setSeatAngle(360 - seat.getAngle());
-            seattext.setText("" + (360 - seat.getAngle()));
+            data.setSeatAngle(data.getSeatAngle() + 1);
+            seattext.setText("" + data.getSeatAngle());
+            seatChairView.update();
+            backChairView.update();
         }
     }
 
@@ -164,7 +168,6 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             isNeedAdd = true;
             btnTouching = v;
-            new Thread(addRunnable).start();
         } else if (event.getAction() == KeyEvent.ACTION_UP) {
             isNeedAdd = false;
         }
@@ -175,8 +178,10 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
         @Override
         public void run() {
-            while (isNeedAdd) {
-                uiHandler.sendEmptyMessage(0);
+            while (true) {
+                if (isNeedAdd) {
+                    uiHandler.sendEmptyMessage(0);
+                }
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -197,9 +202,8 @@ public class SettingManuFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void update() {
-        int[] receiveData = data.getPressure();
 
-        String ret = "p1:" + receiveData[0] + " p2:" + receiveData[1] + "  p3:" + receiveData[2] + " p4:" + receiveData[3] + " p5:" + receiveData[4] + " p6:" + receiveData[5] + " p7:" + receiveData[6] + " p8:" + receiveData[7];
+        String ret = "back:" + data.getBackPressure() + " waist:" + data.getWaistPressure() + " hips:" + data.getHipsPressure() + " thigh:" + data.getThighPressure();
         pressure.setText(ret);
 
         if (data.getTime() >= 90) {
