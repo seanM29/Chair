@@ -67,7 +67,7 @@ public class DataWeekFragment extends BaseFragment {
 
     /*
     * 设置数据
-    * type：表示哪一种Score. 1:back， 2：HIPS, 3:WAIST, 4:THIGH
+    * type：表示哪一种Score. 1:backChairView， 2：HIPS, 3:WAIST, 4:THIGH
     * data：周一到周日的分数
     * score：总分数
     * */

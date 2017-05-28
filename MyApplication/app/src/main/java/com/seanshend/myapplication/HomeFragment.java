@@ -1,11 +1,13 @@
 package com.seanshend.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.seanshend.DataModel;
 import com.seanshend.view.chairview.ChairView;
 import com.seanshend.view.pieview.PieData;
 
@@ -18,6 +20,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     TextView backDegreeTv;
     TextView seatDegreeTv;
     TextView timeTv;
+    ChairView chairView = null;
 
 
     @Override
@@ -37,23 +40,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         backDegreeTv = (TextView) view.findViewById(R.id.backDegreeTv);
         seatDegreeTv = (TextView) view.findViewById(R.id.seatDegreeTv);
         timeTv = (TextView) view.findViewById(R.id.timeTv);
+        chairView = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.chairView);
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-        ArrayList<PieData> datas = new ArrayList<>();
-        PieData pieData = new PieData("Total", data.getTotalScore());
-        PieData pieData2 = new PieData("back", data.getBackScore());
-        PieData pieData3 = new PieData("Waist", data.getWaistScore());
-        PieData pieData4 = new PieData("Hips", data.getHipsScore());
-        PieData pieData5 = new PieData("Thigh", data.getThighScore());
-        datas.add(pieData);
-        datas.add(pieData2);
-        datas.add(pieData3);
-        datas.add(pieData4);
-        datas.add(pieData5);
-        v1.setData(datas);
+        chairView.Settype(1, data);
         update();
     }
 
@@ -83,8 +76,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void update() {
-        backDegreeTv.setText(data.isConnected()?data.getBackAngle()+ "":"未连接蓝牙" );
-        seatDegreeTv.setText(data.isConnected()?data.getSeatAngle()+ "":"未连接蓝牙");
-        timeTv.setText(data.isConnected()?data.getTime()+ "":"未连接蓝牙");
+        backDegreeTv.setText(data.isConnected() ? data.getBackAngle() + "" : "未连接蓝牙");
+        seatDegreeTv.setText(data.isConnected() ? data.getSeatAngle() + "" : "未连接蓝牙");
+        timeTv.setText(data.isConnected() ? data.getTime() + "" : "未连接蓝牙");
+        ArrayList<PieData> datas = new ArrayList<>();
+        PieData pieData = new PieData("Total", (int) data.getTotalScore());
+        PieData pieData2 = new PieData("Back", (int) data.getBackScore());
+        PieData pieData3 = new PieData("Waist", (int) data.getWaistScore());
+        PieData pieData4 = new PieData("Hips", (int) data.getHipsScore());
+        PieData pieData5 = new PieData("Thigh", (int) data.getThighScore());
+        datas.add(pieData);
+        datas.add(pieData2);
+        datas.add(pieData3);
+        datas.add(pieData4);
+        datas.add(pieData5);
+        v1.setData(datas);
+        chairView.update();
     }
 }

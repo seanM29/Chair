@@ -1,8 +1,6 @@
 package com.seanshend.myapplication;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +22,8 @@ public class SettingAutoDetailFragment extends BaseFragment implements View.OnCl
     private TextView frontValTv = null;
     private TextView modeTv = null;
     private TextView goBack = null;
-    com.seanshend.view.chairview.ChairView back;
-    com.seanshend.view.chairview.ChairView seat;
+    com.seanshend.view.chairview.ChairView backChairView;
+    com.seanshend.view.chairview.ChairView seatChairView;
 
     private int backVal;
     private int seatVal;
@@ -50,8 +48,8 @@ public class SettingAutoDetailFragment extends BaseFragment implements View.OnCl
         modeTv = (TextView) view.findViewById(R.id.modeTv);
         goBack = (TextView) view.findViewById(R.id.goBack);
 
-        back = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.Back);
-        seat = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.Front);
+        backChairView = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.Back);
+        seatChairView = (com.seanshend.view.chairview.ChairView) view.findViewById(R.id.Front);
     }
 
     @Override
@@ -66,15 +64,15 @@ public class SettingAutoDetailFragment extends BaseFragment implements View.OnCl
     protected void initDatas() {
         super.initDatas();
         Bundle bundle = getArguments();
-        backVal = bundle.getInt("back");
-        seatVal = bundle.getInt("seat");
+        backVal = bundle.getInt("backChairView");
+        seatVal = bundle.getInt("seatChairView");
         pic = bundle.getString("pic");
         modeID = bundle.getInt("modeID");
 
-        back.Settype(1, backVal);
+        backChairView.Settype(3, backVal,seatVal);
         backValTv.setText("" + backVal);
 
-        seat.Settype(2, 360 - seatVal);
+        seatChairView.Settype(4, backVal,seatVal);
         frontValTv.setText("" + seatVal);
 
         modeTv.setText(bundle.getString("mode"));

@@ -61,13 +61,13 @@ public class BlueTooth {
                     //Send
                     if (!Q.isEmpty()) {
                         Integer msg = Q.remove();
-                        Log.i(MainActivity.LOG_TAG, "Send run : " + msg);
+//                        Log.i(MainActivity.LOG_TAG, "Send run : " + msg);
                         outputStream.write(msg);
                     }
                     //Receive
                     if (inputStream.available() > 0) {
                         int msg = inputStream.read();
-                        Log.i(MainActivity.LOG_TAG, "Receive run : " + msg);
+//                        Log.i(MainActivity.LOG_TAG, "Receive run : " + msg);
                         blueToothListener.onReceiving(msg);
                     }
 

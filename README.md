@@ -1,11 +1,11 @@
-# Chair
-Chair APP
+# Wheel-chair
+wheel-chair APP
 
 ## 结构
 
 MyApplication 文件为整个工程文件
 
-Deemo为演示视频
+Demo为演示视频
 
 
 ## 数据交互3个部分，可直接调用setData

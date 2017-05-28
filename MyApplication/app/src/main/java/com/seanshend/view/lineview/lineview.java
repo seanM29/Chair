@@ -28,6 +28,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.seanshend.DataModel;
 import com.seanshend.view.pieview.PieData;
 
 import java.util.ArrayList;
@@ -105,10 +106,10 @@ public class lineview extends View {
 
 
 
-        if (type == 0) {           //默认状态
+        if (type == 0) { //back
             mPaint.setStrokeWidth(5);
             mPaint.setColor(0xff4c9fff);
-            float center = (float) (1.0 * (angle-41) * mWidth / 40.0);
+            float center = (float) (1.0 * (angle- DataModel.MIN_BACK) * mWidth / (DataModel.MAX_BACK-DataModel.MIN_BACK));
             canvas.drawLine(0, 0, center, 0, mPaint);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawLine(center, 0, mWidth, 0, mPaint);
@@ -121,10 +122,10 @@ public class lineview extends View {
             mPaint.setStyle(Paint.Style.STROKE);
             RectF rect2 = new RectF(-r - 1, -r - 1, r + 1, r + 1);
             canvas.drawArc(rect2, 0, 360, true, mPaint);
-        } else {
+        } else { //seat
             mPaint.setStrokeWidth(5);
             mPaint.setColor(Color.BLACK);
-            float center = (float) (1.0 * (angle-4) * mWidth / 22.0);
+            float center = (float) (1.0 * (angle-DataModel.MIN_SEAT) * mWidth / (DataModel.MAX_SEAT-DataModel.MIN_SEAT));
             canvas.drawLine(0, 0, center, 0, mPaint);
             mPaint.setColor(BackgroundColor[0]);
             canvas.drawLine(center, 0, mWidth, 0, mPaint);
